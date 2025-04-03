@@ -1,5 +1,3 @@
-
-
 ## Project - Football Prediction
 
 This project focuses on designing, training, and evaluating a machine learning model for predicting football match outcomes. The initial implementation is based on the **French Ligue 1**, using data from the **2023-24 and 2024-25 seasons**.
@@ -9,8 +7,6 @@ The workflow includes:
 - **Model design and training**: Testing different ML algorithms such as logistic regression, random forests, and neural networks.
 - **Performance evaluation**: Assessing model accuracy using various metrics.
 - **Future extensions**: Expanding predictions to other leagues and sports.
-
----
 
 ## Introduction
 
@@ -59,7 +55,7 @@ Using the lines following the comment `#anomalies in the data`, we can analyse i
 
 ## Pipeline
 
-1. **Data Collection & Cleaning**  
+### **Data Collection & Cleaning**  
    - Import and preprocess football match data.
    - Handle missing values and create relevant features.
 
@@ -70,16 +66,44 @@ columns_to_drop = ["Date", "HTHG", "HTAG", "HTR", "Referee"]
 ```
 In order to grasp a better understanding of our dataset, let's plot some charts to see if we notice any unbalance. 
 
+First of all, let's see the distribution of win-lose : 
+
+<div align="center">
+    <img src="./images/Result_distribution.png" alt="Football Data Analysis" width="400px"/>
+    <p><em>Football match data analysis for prediction.</em></p>
+</div>
+
+Home wins are the most common result, followed by away wins and then draws. This suggests a home advantage in the dataset, which should be considered when training our predictive model.
+
 <div style="display: flex; justify-content: space-between;">
   <img src="./images/home_teams.png" alt="Description of first image" style="width: 49%;">
   <img src="./images/away_teams.png" alt="Description of second image" style="width: 49%;">
 </div>
 
-2. **Model Selection & Training**  
+This bar chart illustrates how frequently each team played as an away team. Some teams, like Paris SG and Lens, appear more frequently, while others have significantly fewer away matches. Similar to the away teams distribution, this second chart shows the frequency of home games per team. The imbalance here suggests that some teams have had disproportionately more home matches. This could introduce bias when training a model to predict home performance.
+
+<div align="center">
+    <img src="./images/goals_distribution.png" alt="Football Data Analysis" width="400px"/>
+    <p><em>Football match data analysis for prediction.</em></p>
+</div>
+
+The graph shows the number of goals scored per match, split between home and away teams. The distribution suggests that home teams tend to score slightly more goals than away teams. However, the imbalance does not appear extreme, meaning goal prediction models might not suffer from significant bias.
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="./images/cards_distribution.png" alt="Description of first image" style="width: 55%;">
+  <img src="./images/fouls_distribution.png" alt="Description of second image" style="width: 45%;">
+</div>
+
+Home teams receive about 44.4% of yellow cards, while away teams receive slightly more at 50.1%. Red cards are much rarer, with both home and away teams receiving them in small proportions. The slight imbalance might indicate that referees give more cards to away teams, which could be a small factor in predictive modeling.
+
+Moreover, the fouls are nearly evenly split between home and away teams (49.2% vs. 50.8%), indicating no strong referee bias in foul calls. This balance suggests that fouls alone may not introduce significant bias into machine learning models.
+
+
+### **Model Selection & Training**  
    - Implement various machine learning models (`scikit-learn`, `TensorFlow` for deep learning).
    - Tune hyperparameters for optimal performance.
 
-3. **Evaluation & Testing**  
+### **Evaluation & Testing**  
    - Compare models using metrics like accuracy, F1-score, and confusion matrices.
    - Validate predictions using historical match data.
 
